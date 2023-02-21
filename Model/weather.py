@@ -4,7 +4,7 @@ from geopy.geocoders import Nominatim
 import datetime
 from datetime import datetime, timedelta
 
-API = "5a7cd2d185851b0baa84a47051036417"
+API = ""
 
 class Weather:
     
