@@ -29,13 +29,13 @@ First of all I created the packages which are Model, View, Controller. Inside ea
 
 ### Model 
 + Beginning with the Model package and weather.py. The class constructor receives a location parameter and initiates the latitude and longitude variables by calling getLocationInfo function which returns these two values.
-+ Then the callApiCurrent(), callApiForecast() are responsible for calling the API service of OpenWeatherMap for the current weather and forecast respectively.
-+ All the get functions returns the respective information from the api call response.
++ Then the callApiCurrent(), callApiForecast() are responsible for calling the API service of OpenWeatherMap for the current weather and forecast respectively. Thus currentWeatherData and forecastWeatherData dictionaries are filled up.
++ All the getters returns the respective information from the api call response.
 
 
 
 ### View 
-+ The class constructor creates the window and initiates all the variables. It creates the main fraim and calls all the functions which add the information to the window.
++ The view class constructor creates the window and initiates all the variables. It creates the main frame and calls all the functions which add the information to the window.
 + The createSearchBarFrame function is responsible for creating the search bar at the top of the window and specifies the callback function to be handleSearchButton (Controller class)
 + The createCurrentWeatherFrame function creates all the labels and the values for the currentWeatherFrame. It uses the grid method to position the labels and the values.
 + The createDevider function creates a divider between the current weather frame and the forecast weather frame.
@@ -47,8 +47,8 @@ First of all I created the packages which are Model, View, Controller. Inside ea
 
 ### Controller 
 + Controllers constructor is responsible to initialize view and model objects and to run the updateGui function
-+  The updateGui function uses the se function to update all the variables in the view class in order to be updated on the window which is displayed
-+   The handleSearchButton is responsible for calling the api functions with the location that user wrote in the search bar and then to update the gui with the new values.
++ The updateGui function uses the se function to update all the variables in the view class in order to be updated on the window which is displayed
++ The handleSearchButton is responsible for calling the api functions with the location (as a parameter) that user wrote in the search bar and then to update the gui with the new values.
 
 
 # ToDo
