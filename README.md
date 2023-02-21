@@ -7,18 +7,18 @@ Before running the programm you need to install (For Windows):
 -> pip3 install tk
 -> pip3 install geopy
 
-##############
-# How to run #
-##############     
+
+# How to run 
+    
 -> Enter your API key for OpenWeatherMap into WeatherApp/Model/weather.py
 -> Then run: python .\main.py
 -> Optionally: When you run the app Berlin weather and forecast loads by default. 
    If you want to change it, change the parameter value of the Controller object in WeatherApp/main.py
 
 
-##############
-#   Report   #
-##############
+
+#   Report   
+
 The project is implemented using the MVC template.
 -> Model defines data structure
 -> View defines user's interface
