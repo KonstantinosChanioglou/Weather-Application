@@ -83,7 +83,7 @@ class View(tk.Tk): #View inherits from tkinter
         labelWindSpeed.grid(row=7, column=0, pady=5, sticky=W)  
         
         # Create an object of tkinter ImageTk
-        image = Image.open("Photos/01d.png") #default image instead of self.varPhoto[step] and ToDo
+        image = Image.open("Photos/01d.png") #default image instead of self.varPhoto and ToDo
         photo = ImageTk.PhotoImage(image)
         
         
