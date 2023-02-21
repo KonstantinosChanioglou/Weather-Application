@@ -3,9 +3,9 @@ Weather App Python Project
 
 
 Before running the program you need to install (For Windows):
-	pip3 install requests
-	pip3 install tk
-	pip3 install geopy
+-pip3 install requests
+-pip3 install tk
+-pip3 install geopy
 
 
 # How to run 
