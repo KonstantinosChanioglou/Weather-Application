@@ -27,6 +27,9 @@ The project is implemented using the MVC template.
 First of all I created the packages which are Model, View, Controller. Inside each the folders, __init__.py file must exists to define that these folders are packages of the project.
 
 --- Model ---
-Beggining with the Model package and weather.py. The class' constructor recieves a location parameter and initiates the latitude and longitude variables.
-Then the callApiCurrent(), callApiForecast() are responsible for calling the API servise of OpenWeatherMap for the current weather and forecast respectively.
-All the get functions returns the respective information from the api call response.
+->Beggining with the Model package and weather.py. The class' constructor recieves a location parameter and initiates the latitude and longitude variables by calling getLocationInfo function which returns these two values.
+->Then the callApiCurrent(), callApiForecast() are responsible for calling the API servise of OpenWeatherMap for the current weather and forecast respectively.
+->All the get functions returns the respective information from the api call response.
+
+
+
