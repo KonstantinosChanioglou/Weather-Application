@@ -47,7 +47,7 @@ class View(tk.Tk): #View inherits from tkinter
         self.mainFrame.pack()
         self.createSearchBarFrame()
         self.createCurrentWeatherFrame()
-        self.createDevider()
+        self.createDivider()
         self.createForecastWeatherFrame()
     
 
@@ -114,7 +114,7 @@ class View(tk.Tk): #View inherits from tkinter
 
 
 
-    def createDevider(self):
+    def createDivider(self):
         # horizontal separator
         ttk.Separator(
             master=self.mainFrame,
