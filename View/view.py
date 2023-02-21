@@ -1,14 +1,6 @@
-
-'''
-Before running the programm you need to install (For Windows):
-pip3 install requests
-pip3 install tk
-pip3 install geopy
-'''
-
 import tkinter as tk
 from tkinter.constants import *
-from tkinter import StringVar, IntVar
+from tkinter import StringVar
 from tkinter.ttk import *
 from tkinter import ttk
 from PIL import ImageTk, Image
@@ -25,6 +17,7 @@ class View(tk.Tk): #View inherits from tkinter
         self.varSearch = StringVar()
 
         self.varLocation = StringVar()
+        self.varCountry = StringVar()
         self.varPhoto = StringVar()
         self.varDateTime = StringVar()
         self.varCondition = StringVar()
@@ -53,7 +46,7 @@ class View(tk.Tk): #View inherits from tkinter
         self.mainFrame = Frame()
         self.mainFrame.pack()
         self.createSearchBarFrame()
-        self.createCurrentWeatherFrame("01d")
+        self.createCurrentWeatherFrame()
         self.createDevider()
         self.createForecastWeatherFrame()
     
@@ -67,7 +60,7 @@ class View(tk.Tk): #View inherits from tkinter
         self.frameSearchBar.pack()
 
 
-    def createCurrentWeatherFrame(self, photoName):
+    def createCurrentWeatherFrame(self):
         self.currentWeatherFrame = Frame(self.mainFrame)
         self.headerFrame = Frame(self.mainFrame, width=50, height=50)
         self.currentWeatherFrame['padding'] = (5,10,5,30)
@@ -90,14 +83,14 @@ class View(tk.Tk): #View inherits from tkinter
         labelWindSpeed.grid(row=7, column=0, pady=5, sticky=W)  
         
         # Create an object of tkinter ImageTk
-        image = Image.open("Photos/"+photoName+".png") 
+        image = Image.open("Photos/01d.png") #default image instead of self.varPhoto[step] and ToDo
         photo = ImageTk.PhotoImage(image)
         
         
-        
-        location = Label(self.headerFrame, textvariable=self.varLocation, font=('Times', 15))
-        img = Label(self.headerFrame, image=photo)#self.varPhoto.get())
-        img.image = photo #self.varPhoto.get()
+        location = Label(self.headerFrame, textvariable=self.varLocation, font=('Times', 18))
+        country = Label(self.headerFrame, textvariable=self.varCountry, font=('Times', 11))
+        img = Label(self.headerFrame, image=photo)
+        img.image = photo
         dateTime = Label(self.currentWeatherFrame, textvariable=self.varDateTime)
         condition = Label(self.currentWeatherFrame, textvariable=self.varCondition)
         temp = Label(self.currentWeatherFrame,  textvariable=self.varTemp)
@@ -105,8 +98,10 @@ class View(tk.Tk): #View inherits from tkinter
         humidity = Label(self.currentWeatherFrame,  textvariable=self.varHumidity)
         windSpeed = Label(self.currentWeatherFrame,  textvariable=self.varWindSpeed)
         
-        location.pack(padx=20, pady=20, side=LEFT) 
+        location.pack(padx=3, pady=20, side=LEFT) 
+        country.pack(padx=2, pady=20, side=LEFT)
         img.pack( padx=20, pady=20, side=RIGHT)
+        
         dateTime.grid(row=2, column=1, padx=60, pady=5, sticky=E)
         condition.grid(row=3, column=1, padx=60, pady=5, sticky=E)
         temp.grid(row=4, column=1, padx=60, pady=5, sticky=E)
@@ -143,7 +138,6 @@ class View(tk.Tk): #View inherits from tkinter
         labelFeelsLike = Label(self.forecastWeatherFrame, text='Feels Like (C):')
         labelHumidity = Label(self.forecastWeatherFrame, text='Humidity (%):')
         labelWindSpeed = Label(self.forecastWeatherFrame, text='Wind Speed (m/s):')
-        
 
         #---Labels attach to the grid
         labelDateTime.grid(row=1, column=0, pady=5, sticky=W)
@@ -166,7 +160,7 @@ class View(tk.Tk): #View inherits from tkinter
         for step in range(0,3):
             
             # Create an object of tkinter ImageTk
-            image = Image.open("Photos/01d.png") 
+            image = Image.open("Photos/01d.png") #default image instead of self.varPhoto[step] and ToDo
             photo = ImageTk.PhotoImage(image)
             
             img.append(Label(self.forecastWeatherFrame, image=photo))
@@ -185,7 +179,6 @@ class View(tk.Tk): #View inherits from tkinter
             feelsLike[step].grid(row=4, column=step+1, padx=40, pady=5, sticky=E)
             humidity[step].grid(row=5, column=step+1, padx=40, pady=5, sticky=E)
             windSpeed[step].grid(row=6, column=step+1, padx=40, pady=5, sticky=E)        
-
         
         self.forecastWeatherFrame.pack()
         

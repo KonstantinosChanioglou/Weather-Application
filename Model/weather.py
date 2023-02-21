@@ -2,14 +2,17 @@ import requests
 import json
 from geopy.geocoders import Nominatim
 import datetime
+from datetime import datetime, timedelta
+
+API = "5a7cd2d185851b0baa84a47051036417"
 
 class Weather:
     
+    beggin = 0;
     
     def __init__(self, location) -> None: #type-check the method and raise an error
         
         self.location = location
-        self.api_key = "5a7cd2d185851b0baa84a47051036417"
 
         try:
             self.lat, self.lon = self.getLocationInfo(location)
@@ -27,17 +30,20 @@ class Weather:
 
     def callApiCurrent(self):
         print("Api calling self lat:"+ str(self.lat)+" self long:"+ str(self.lon))
-        url = "https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s&units=metric" % (self.lat, self.lon, self.api_key) # Construct the URL with the parameters
+        url = "https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s&units=metric" % (self.lat, self.lon, API) # Construct the URL with the parameters
         response = requests.get(url) #Calls API and get the response
         self.currentWeatherData = json.loads(response.text) #Convers json object into a dictionary with kyes and values
 
     def callApiForcast(self):
-        url = "https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&appid=%s&units=metric" % (self.lat, self.lon, self.api_key) # Construct the URL with the parameters
+        url = "https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&appid=%s&units=metric" % (self.lat, self.lon, API) # Construct the URL with the parameters
         response = requests.get(url) #Calls API and get the response
         self.forecastWeatherData = json.loads(response.text) #Convers json object into a dictionary with kyes and values
 
 
     #---- Curent Weather
+    def getCountry(self):
+        return "("+self.currentWeatherData['sys']['country']+")"
+    
     def getLocation(self):
         return self.location
     
@@ -45,7 +51,8 @@ class Weather:
         return self.currentWeatherData['weather'][0]['icon']
     
     def getCurrentDateTime(self):
-        now = datetime.datetime.now()
+        now = datetime.utcnow()
+        now = now + timedelta(seconds=self.currentWeatherData['timezone'])
         return now.strftime("%Y-%m-%d %H:%M:%S")
     
     def getCurrentCondition(self):
@@ -69,7 +76,9 @@ class Weather:
         return self.forecastWeatherData['list'][step]['weather'][0]['icon']
     
     def getForecastDateTime(self,step):
-        return self.forecastWeatherData['list'][step]['dt_txt']
+        dt = datetime.strptime(self.forecastWeatherData['list'][step]['dt_txt'], '%Y-%m-%d %H:%M:%S')
+        dt = dt + timedelta(seconds=self.forecastWeatherData['city']['timezone'])
+        return dt.strftime("%Y-%m-%d %H:%M:%S")
 
     def getForecastCondition(self,step):
         return self.forecastWeatherData['list'][step]['weather'][0]['description']
@@ -88,7 +97,7 @@ class Weather:
 
     def getLocationInfo(self, location):
         # Initialize Nominatim API
-        geolocator = Nominatim(user_agent="MyApp")
+        geolocator = Nominatim(user_agent="WeatheApp")
         location = geolocator.geocode(location)
         return location.latitude, location.longitude
         
